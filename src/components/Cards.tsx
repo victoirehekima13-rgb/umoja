@@ -12,16 +12,16 @@ interface ProgramCardProps {
 
 export function ProgramCard({ program }: ProgramCardProps) {
   const categoryColors = {
-    health: "bg-accent/10 text-accent border-accent/20",
-    logistics: "bg-primary/10 text-primary border-primary/20",
-    protection: "bg-secondary/10 text-secondary-foreground border-secondary/20",
-    coordination: "bg-muted text-muted-foreground border-border",
+    health: "bg-accent/15 text-accent border-accent/30",
+    logistics: "bg-primary/15 text-primary border-primary/30",
+    protection: "bg-secondary/15 text-secondary-foreground border-secondary/30",
+    coordination: "bg-muted/80 text-muted-foreground border-border",
   };
 
   const levelColors = {
-    beginner: "bg-green-500/10 text-green-700 dark:text-green-400",
-    intermediate: "bg-yellow-500/10 text-yellow-700 dark:text-yellow-400",
-    advanced: "bg-red-500/10 text-red-700 dark:text-red-400",
+    beginner: "bg-green-500/15 text-green-700 dark:text-green-400 border-green-500/30",
+    intermediate: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30",
+    advanced: "bg-rose-500/15 text-rose-700 dark:text-rose-400 border-rose-500/30",
   };
 
   return (
@@ -31,24 +31,24 @@ export function ProgramCard({ program }: ProgramCardProps) {
       whileHover="hover"
       className="h-full"
     >
-      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/95 border-border/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
-        <div className="relative h-48 overflow-hidden">
+      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/95 border-border/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/30 group">
+        <div className="relative h-52 overflow-hidden">
           <img
             src={program.image}
             alt={program.title}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
           <div className="absolute top-4 right-4 flex gap-2">
             {program.certification && (
-              <Badge className="bg-primary text-primary-foreground">
+              <Badge className="bg-primary/90 backdrop-blur-sm text-primary-foreground shadow-lg">
                 <Award className="w-3 h-3 mr-1" />
                 Certifié
               </Badge>
             )}
           </div>
           <div className="absolute bottom-4 left-4 right-4">
-            <Badge className={categoryColors[program.category]}>
+            <Badge className={`${categoryColors[program.category]} backdrop-blur-sm border`}>
               {PROGRAM_CATEGORIES[program.category]}
             </Badge>
           </div>
@@ -94,17 +94,17 @@ export function ProgramCard({ program }: ProgramCardProps) {
           )}
         </CardContent>
 
-        <CardFooter className="flex items-center justify-between pt-4 border-t">
+        <CardFooter className="flex items-center justify-between pt-4 border-t border-border/50">
           {program.price && (
-            <p className="text-lg font-semibold text-primary">{program.price}</p>
+            <p className="text-lg font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">{program.price}</p>
           )}
           {program.startDate && (
-            <p className="text-sm text-muted-foreground flex items-center gap-1">
+            <p className="text-sm text-muted-foreground flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
               {program.startDate}
             </p>
           )}
-          <Button size="sm" className="ml-auto">
+          <Button size="sm" className="ml-auto rounded-full px-5 shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
             En savoir plus
           </Button>
         </CardFooter>
@@ -129,11 +129,11 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   const TypeIcon = typeIcons[resource.type];
 
   const typeColors = {
-    guide: "bg-primary/10 text-primary",
-    report: "bg-accent/10 text-accent",
-    'case-study': "bg-secondary/10 text-secondary-foreground",
-    video: "bg-destructive/10 text-destructive",
-    tool: "bg-muted text-muted-foreground",
+    guide: "bg-primary/15 text-primary border-primary/30",
+    report: "bg-accent/15 text-accent border-accent/30",
+    'case-study': "bg-secondary/15 text-secondary-foreground border-secondary/30",
+    video: "bg-rose-500/15 text-rose-600 dark:text-rose-400 border-rose-500/30",
+    tool: "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30",
   };
 
   return (
@@ -143,16 +143,16 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       whileHover="hover"
       className="h-full"
     >
-      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/95 border-border/50 transition-all duration-300 hover:shadow-lg hover:shadow-accent/10">
-        <div className="relative h-40 overflow-hidden">
+      <Card className="h-full overflow-hidden backdrop-blur-sm bg-card/95 border-border/40 transition-all duration-500 hover:shadow-2xl hover:shadow-accent/15 hover:border-accent/30 group">
+        <div className="relative h-44 overflow-hidden">
           <img
             src={resource.image}
             alt={resource.title}
-            className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
           <div className="absolute top-4 left-4">
-            <Badge className={typeColors[resource.type]}>
+            <Badge className={`${typeColors[resource.type]} backdrop-blur-sm border`}>
               <TypeIcon className="w-3 h-3 mr-1" />
               {RESOURCE_TYPES[resource.type]}
             </Badge>
@@ -186,15 +186,15 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           </Badge>
         </CardContent>
 
-        <CardFooter className="flex gap-2 pt-4 border-t">
+        <CardFooter className="flex gap-3 pt-4 border-t border-border/50">
           {resource.viewUrl && (
-            <Button variant="outline" size="sm" className="flex-1">
+            <Button variant="outline" size="sm" className="flex-1 rounded-full hover:bg-accent/10 hover:text-accent hover:border-accent/30 transition-all duration-300">
               <Eye className="w-4 h-4 mr-2" />
               Voir
             </Button>
           )}
           {resource.downloadUrl && (
-            <Button size="sm" className="flex-1">
+            <Button size="sm" className="flex-1 rounded-full shadow-md hover:shadow-lg hover:shadow-primary/20 transition-all duration-300">
               <Download className="w-4 h-4 mr-2" />
               Télécharger
             </Button>
@@ -217,24 +217,24 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       whileHover="hover"
       className="h-full"
     >
-      <Card className="h-full backdrop-blur-sm bg-card/95 border-border/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/10">
+      <Card className="h-full backdrop-blur-sm bg-card/95 border-border/40 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/15 hover:border-primary/30 group">
         <CardHeader>
           <div className="flex items-start gap-4">
-            <div className="relative w-16 h-16 rounded-full overflow-hidden flex-shrink-0 ring-2 ring-primary/20">
+            <div className="relative w-16 h-16 rounded-2xl overflow-hidden flex-shrink-0 ring-2 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300">
               <img
                 src={testimonial.image}
                 alt={testimonial.name}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
               />
             </div>
             <div className="flex-1 min-w-0">
-              <CardTitle className="text-lg font-semibold">
+              <CardTitle className="text-lg font-semibold group-hover:text-primary transition-colors duration-300">
                 {testimonial.name}
               </CardTitle>
               <p className="text-sm text-muted-foreground line-clamp-1">
                 {testimonial.role}
               </p>
-              <div className="flex items-center gap-2 mt-1 text-xs text-muted-foreground">
+              <div className="flex items-center gap-2 mt-1.5 text-xs text-muted-foreground">
                 <Building2 className="w-3 h-3" />
                 <span className="line-clamp-1">{testimonial.organization}</span>
               </div>
@@ -244,14 +244,14 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
 
         <CardContent>
           <blockquote className="relative">
-            <span className="absolute -top-2 -left-2 text-4xl text-primary/20 font-serif">"</span>
-            <p className="text-muted-foreground italic pl-4 line-clamp-4">
+            <span className="absolute -top-2 -left-2 text-5xl text-primary/15 font-serif">&quot;</span>
+            <p className="text-muted-foreground italic pl-5 line-clamp-4 leading-relaxed">
               {testimonial.content}
             </p>
           </blockquote>
-          <div className="mt-4 pt-4 border-t">
+          <div className="mt-4 pt-4 border-t border-border/50">
             <p className="text-xs text-muted-foreground">
-              Pays: <span className="text-foreground font-medium">{testimonial.country}</span>
+              Pays: <span className="text-foreground font-semibold">{testimonial.country}</span>
             </p>
           </div>
         </CardContent>

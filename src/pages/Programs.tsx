@@ -64,28 +64,35 @@ export default function Programs() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-28 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.TRAINING_1}
             alt="Formation humanitaire"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/8 via-transparent to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto text-center"
           >
-            <Badge className="mb-6 text-base px-6 py-2">
-              <BookOpen className="w-4 h-4 mr-2" />
-              Programmes de Formation
-            </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Badge className="mb-6 text-base px-6 py-2.5 rounded-full border border-primary/20 bg-primary/10">
+                <BookOpen className="w-4 h-4 mr-2" />
+                Programmes de Formation
+              </Badge>
+            </motion.div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent leading-tight">
               Développez Vos Compétences Humanitaires
             </h1>
             <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
@@ -131,7 +138,7 @@ export default function Programs() {
         </div>
       </section>
 
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-gradient-to-b from-muted/20 via-muted/40 to-muted/20">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -140,8 +147,10 @@ export default function Programs() {
             transition={{ duration: 0.5 }}
             className="mb-12"
           >
-            <div className="flex items-center gap-3 mb-8">
-              <Filter className="w-6 h-6 text-primary" />
+            <div className="flex items-center gap-4 mb-8">
+              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                <Filter className="w-6 h-6 text-primary" />
+              </div>
               <h2 className="text-2xl font-bold">Filtrer les Programmes</h2>
             </div>
             <div className="flex flex-col md:flex-row gap-4">
@@ -153,7 +162,7 @@ export default function Programs() {
                       key={cat.value}
                       variant={selectedCategory === cat.value ? 'default' : 'outline'}
                       onClick={() => setSelectedCategory(cat.value)}
-                      className="transition-all"
+                      className={`transition-all duration-300 rounded-full ${selectedCategory === cat.value ? 'shadow-lg shadow-primary/25' : 'hover:border-primary/50'}`}
                     >
                       {cat.label}
                     </Button>
@@ -168,7 +177,7 @@ export default function Programs() {
                       key={lvl.value}
                       variant={selectedLevel === lvl.value ? 'default' : 'outline'}
                       onClick={() => setSelectedLevel(lvl.value)}
-                      className="transition-all"
+                      className={`transition-all duration-300 rounded-full ${selectedLevel === lvl.value ? 'shadow-lg shadow-primary/25' : 'hover:border-primary/50'}`}
                     >
                       {lvl.label}
                     </Button>

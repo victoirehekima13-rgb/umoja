@@ -138,40 +138,55 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen">
-      <section className="relative py-24 overflow-hidden">
+      <section className="relative py-28 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img
             src={IMAGES.TEAM_3}
             alt="Contact"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/90 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/85 to-background" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/5 via-transparent to-transparent" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            transition={{ duration: 0.8 }}
+            className="text-center max-w-3xl mx-auto mb-20"
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6"
+            >
+              <Mail className="w-4 h-4" />
+              Restons en contact
+            </motion.div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
               Contactez-Nous
             </h1>
-            <p className="text-xl text-muted-foreground">
+            <p className="text-xl text-muted-foreground leading-relaxed">
               Nous sommes là pour répondre à vos questions et vous accompagner dans votre parcours humanitaire
             </p>
           </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
             >
-              <Card className="border-2 border-border/50 shadow-lg">
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-6">Envoyez-nous un message</h2>
+              <Card className="border border-border/40 shadow-2xl shadow-primary/5 backdrop-blur-sm bg-card/95">
+                <CardContent className="p-8 lg:p-10">
+                  <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                      <Send className="w-5 h-5 text-primary" />
+                    </div>
+                    Envoyez-nous un message
+                  </h2>
                   
                   {submitStatus === 'success' && (
                     <motion.div
@@ -267,7 +282,7 @@ export default function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full"
+                      className="w-full rounded-xl py-6 text-lg shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02] transition-all duration-300"
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -288,14 +303,19 @@ export default function Contact() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-8"
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="space-y-6"
             >
-              <Card className="border-2 border-border/50 shadow-lg">
+              <Card className="border border-border/40 shadow-xl backdrop-blur-sm bg-card/95">
                 <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold mb-6">Informations de contact</h2>
+                  <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-accent/10 flex items-center justify-center">
+                      <Phone className="w-5 h-5 text-accent" />
+                    </div>
+                    Informations de contact
+                  </h2>
                   <div className="space-y-6">
                     {contactInfo.map((info, index) => {
                       const Icon = info.icon;

@@ -100,16 +100,16 @@ export function Globe3D({ className }: Globe3DProps) {
         centerY,
         radius
       )
-      gradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)')
-      gradient.addColorStop(0.5, 'rgba(59, 130, 246, 0.08)')
-      gradient.addColorStop(1, 'rgba(59, 130, 246, 0.02)')
+      gradient.addColorStop(0, 'rgba(37, 99, 235, 0.18)')
+      gradient.addColorStop(0.5, 'rgba(37, 99, 235, 0.10)')
+      gradient.addColorStop(1, 'rgba(37, 99, 235, 0.03)')
 
       ctx.fillStyle = gradient
       ctx.beginPath()
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
       ctx.fill()
 
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)'
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.25)'
       ctx.lineWidth = 1
       ctx.beginPath()
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2)
@@ -117,7 +117,7 @@ export function Globe3D({ className }: Globe3DProps) {
 
       for (let i = -90; i <= 90; i += 30) {
         ctx.beginPath()
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)'
+        ctx.strokeStyle = 'rgba(37, 99, 235, 0.12)'
         for (let j = 0; j <= 360; j += 5) {
           const point = projectPoint(i, j, rotation)
           if (j === 0) {
@@ -131,7 +131,7 @@ export function Globe3D({ className }: Globe3DProps) {
 
       for (let i = 0; i <= 360; i += 30) {
         ctx.beginPath()
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)'
+        ctx.strokeStyle = 'rgba(37, 99, 235, 0.12)'
         for (let j = -90; j <= 90; j += 5) {
           const point = projectPoint(j, i, rotation)
           if (j === -90) {
@@ -160,7 +160,7 @@ export function Globe3D({ className }: Globe3DProps) {
 
         if (particle.z > 0) {
           const scale = 1 + particle.z / (radius * 2)
-          ctx.fillStyle = `rgba(59, 130, 246, ${particle.alpha * scale})`
+          ctx.fillStyle = `rgba(37, 99, 235, ${particle.alpha * scale * 1.2})`
           ctx.beginPath()
           ctx.arc(centerX + particle.x, centerY - particle.y, 2 * scale, 0, Math.PI * 2)
           ctx.fill()
@@ -178,16 +178,16 @@ export function Globe3D({ className }: Globe3DProps) {
             projected.y,
             15
           )
-          glowGradient.addColorStop(0, `rgba(34, 197, 94, ${point.intensity})`)
-          glowGradient.addColorStop(0.5, `rgba(34, 197, 94, ${point.intensity * 0.5})`)
-          glowGradient.addColorStop(1, 'rgba(34, 197, 94, 0)')
+          glowGradient.addColorStop(0, `rgba(16, 185, 129, ${point.intensity})`)
+          glowGradient.addColorStop(0.5, `rgba(16, 185, 129, ${point.intensity * 0.6})`)
+          glowGradient.addColorStop(1, 'rgba(16, 185, 129, 0)')
 
           ctx.fillStyle = glowGradient
           ctx.beginPath()
           ctx.arc(projected.x, projected.y, 15, 0, Math.PI * 2)
           ctx.fill()
 
-          ctx.fillStyle = `rgba(34, 197, 94, ${point.intensity})`
+          ctx.fillStyle = `rgba(16, 185, 129, ${point.intensity})`
           ctx.beginPath()
           ctx.arc(projected.x, projected.y, 4, 0, Math.PI * 2)
           ctx.fill()
