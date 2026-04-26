@@ -54,31 +54,31 @@ export function StatsCounter({ stats }: StatsCounterProps) {
   }, [isInView, hasAnimated]);
 
   return (
-    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
       {stats.map((stat, index) => {
         const IconComponent = iconMap[stat.icon] || Users;
         
         return (
           <motion.div
             key={stat.id}
-            initial={{ opacity: 0, y: 40 }}
-            animate={hasAnimated ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={hasAnimated ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 40, scale: 0.95 }}
             transition={{
               type: 'spring',
-              stiffness: 300,
-              damping: 35,
-              delay: index * 0.1,
+              stiffness: 200,
+              damping: 25,
+              delay: index * 0.08,
             }}
             className="relative group"
           >
-            <div className="bg-card border border-border rounded-2xl p-8 h-full transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary/30">
+            <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-3xl p-6 h-full transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:scale-105 hover:border-primary/40 hover:-translate-y-1">
               <div className="flex flex-col items-center text-center space-y-4">
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                  <IconComponent className="w-8 h-8 text-primary" />
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center group-hover:from-primary/25 group-hover:to-accent/25 transition-all duration-300 group-hover:scale-110">
+                  <IconComponent className="w-7 h-7 text-primary" />
                 </div>
                 
-                <div className="space-y-2">
-                  <div className="text-4xl font-bold text-foreground">
+                <div className="space-y-1.5">
+                  <div className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
                     <AnimatedCounter 
                       value={stat.value} 
                       suffix={stat.suffix || ''} 
@@ -86,17 +86,17 @@ export function StatsCounter({ stats }: StatsCounterProps) {
                     />
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-foreground">
+                  <h3 className="text-sm font-semibold text-foreground leading-tight">
                     {stat.label}
                   </h3>
                   
-                  <p className="text-sm text-muted-foreground leading-relaxed">
+                  <p className="text-xs text-muted-foreground leading-relaxed hidden lg:block">
                     {stat.description}
                   </p>
                 </div>
               </div>
               
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/5 via-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
             </div>
           </motion.div>
         );

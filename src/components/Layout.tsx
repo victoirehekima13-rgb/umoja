@@ -35,43 +35,44 @@ export function Layout({ children }: LayoutProps) {
   return (
     <div className="min-h-screen flex flex-col">
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-background/80 backdrop-blur-md shadow-lg border-b border-border'
-            : 'bg-transparent'
+            ? 'bg-background/90 backdrop-blur-xl shadow-xl shadow-primary/5 border-b border-border/50'
+            : 'bg-gradient-to-b from-background/60 to-transparent'
         }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 200, damping: 25 }}
       >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-20">
             <Link to={ROUTE_PATHS.HOME} className="flex items-center gap-3 group">
               <motion.div
-                className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg"
-                whileHover={{ scale: 1.05, rotate: 5 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-accent flex items-center justify-center shadow-lg shadow-primary/20 ring-1 ring-primary/20"
+                whileHover={{ scale: 1.08, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
               >
-                <Globe className="w-7 h-7 text-primary-foreground" />
+                <Globe className="w-7 h-7 text-primary-foreground drop-shadow-sm" />
               </motion.div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                <span className="text-xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent group-hover:from-primary group-hover:to-accent transition-all duration-300">
                   Humanitarian Global
                 </span>
-                <span className="text-xs text-muted-foreground">Formation & Ressources</span>
+                <span className="text-xs text-muted-foreground font-medium">Formation & Ressources</span>
               </div>
             </Link>
 
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1 bg-muted/40 backdrop-blur-sm rounded-full p-1.5 border border-border/40">
               {navigationItems.map((item) => (
                 <NavLink
                   key={item.path}
                   to={item.path}
                   className={({ isActive }) =>
-                    `px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                    `px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                       isActive
-                        ? 'bg-primary text-primary-foreground shadow-md'
-                        : 'text-foreground hover:bg-muted hover:text-primary'
+                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/25'
+                        : 'text-foreground/80 hover:bg-background/80 hover:text-primary hover:shadow-sm'
                     }`
                   }
                 >
@@ -81,10 +82,10 @@ export function Layout({ children }: LayoutProps) {
             </nav>
 
             <div className="hidden lg:flex items-center gap-3">
-              <Button variant="outline" size="sm" asChild>
-                <Link to={ROUTE_PATHS.CONTACT}>S'inscrire</Link>
+              <Button variant="outline" size="sm" className="rounded-full px-5 border-border/60 hover:border-primary/50 hover:bg-primary/5" asChild>
+                <Link to={ROUTE_PATHS.CONTACT}>S&apos;inscrire</Link>
               </Button>
-              <Button size="sm" asChild>
+              <Button size="sm" className="rounded-full px-5 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:scale-105 transition-all duration-300" asChild>
                 <Link to={ROUTE_PATHS.PROGRAMS}>Explorer</Link>
               </Button>
             </div>
@@ -143,20 +144,20 @@ export function Layout({ children }: LayoutProps) {
 
       <main className="flex-1 pt-20">{children}</main>
 
-      <footer className="bg-card border-t border-border mt-24">
+      <footer className="bg-gradient-to-b from-muted/30 via-muted/50 to-card border-t border-border/50 mt-24">
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <Globe className="w-6 h-6 text-primary-foreground" />
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary via-primary/90 to-accent flex items-center justify-center shadow-lg shadow-primary/20">
+                  <Globe className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <div className="flex flex-col">
-                  <span className="font-bold text-foreground">Humanitarian Global</span>
-                  <span className="text-xs text-muted-foreground">Formation & Ressources</span>
+                  <span className="font-bold text-lg text-foreground">Humanitarian Global</span>
+                  <span className="text-xs text-muted-foreground font-medium">Formation & Ressources</span>
                 </div>
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
                 Centre mondial de formation et de ressources pour les praticiens humanitaires et du développement.
               </p>
               <div className="flex items-center gap-3">
@@ -164,7 +165,8 @@ export function Layout({ children }: LayoutProps) {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-muted/80 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                  aria-label="Facebook"
                 >
                   <SiFacebook className="w-4 h-4" />
                 </a>
@@ -172,7 +174,8 @@ export function Layout({ children }: LayoutProps) {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-muted/80 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                  aria-label="X (Twitter)"
                 >
                   <SiX className="w-4 h-4" />
                 </a>
@@ -180,7 +183,8 @@ export function Layout({ children }: LayoutProps) {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-lg bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-200"
+                  className="w-10 h-10 rounded-xl bg-muted/80 hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-primary/25"
+                  aria-label="LinkedIn"
                 >
                   <SiLinkedin className="w-4 h-4" />
                 </a>
